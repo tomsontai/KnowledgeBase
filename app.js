@@ -7,6 +7,7 @@ var session = require('express-session');
 
 let app = express();
 
+const PORT = process.env.PORT || 8080
 
 const expressHbs = require('express-handlebars');
 app.engine(
@@ -39,4 +40,4 @@ app.get('/', function (req,res) {
 let userRoutes = require('./routes/user');
 app.use(userRoutes);
 
-app.listen(8080, () => console.log('Server ready'))
+app.listen(PORT, () => console.log('Server ready'))
