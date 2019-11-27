@@ -5,11 +5,12 @@ const router = express.Router();
 
 
 
-
-
 router.get('/getUser', userController.getUser);
 router.get('/getAllUser', userController.getAllUser);
 router.post('/auth',userController.authentication);
+router.post('/editUser');
+
+
 
 module.exports = router;
 

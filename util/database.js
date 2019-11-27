@@ -12,6 +12,9 @@ const dbconnection = mysql.createPool(
     dbConnectionInfo
 );
 
+module.exports = dbconnection.promise();
+
+// testing
 dbconnection.on('connection', function (connection) {
     console.log('DB Connection established');
   
@@ -25,14 +28,4 @@ dbconnection.on('connection', function (connection) {
 
 
 
-module.exports = dbconnection.promise();
 
-
-// testing connection
-dbconnection.getConnection(function(err, connection) {
-  if (err) {
-    return console.error('error: ' + err.message);
-  }
- 
-  console.log('Connected to the MySQL server.');
-});
