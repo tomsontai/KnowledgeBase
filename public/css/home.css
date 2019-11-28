@@ -1,0 +1,36 @@
+#home {
+    background: gray;
+}
+
+#home-content {
+    max-width: 800px;
+    margin: auto;
+    background: white;
+}
+
+.profile-section{
+    width: 50%;
+    float: left;
+}
+
+.post-section {
+    width: 50%;
+    float: right;
+}
+
+
+
+
+
+/* Temprory stores header css here, might need to seperate later */
+
+header {
+    width: 100%;
+    height: 50px;
+    margin-bottom: 25px;
+    text-align: right;
+}
+
+
+
+

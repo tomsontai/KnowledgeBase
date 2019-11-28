@@ -21,18 +21,12 @@ img {
     margin: auto;
 }
 
-.login-form {
-    width: 80%;
-    margin: 0 auto;
-    font-family: Tahoma, Geneva, sans-serif;
-}
-
+.login-form,
 .register-form {
     width: 80%;
     margin: 0 auto;
     font-family: Tahoma, Geneva, sans-serif;
 }
-
 
 .login-form h1,
 .register-form h1 {
@@ -40,6 +34,12 @@ img {
     color: #4d4d4d;
     font-size: 24px;
     padding: 20px 0 20px 0;
+}
+
+.about {
+    width: 40%;
+    margin: 20vh auto;
+    text-align: center;
 }
 
 .register-name {
