@@ -5,11 +5,34 @@ const router = express.Router();
 
 
 
+router.get('/', function (req,res) {
+    if(req.session.loggedin) {
+        res.render('home', {user: req.session.user, homeCSS: true})
+    } else {
+        res.render('login', {loginCSS: true});
+    }   
+});
 
+router.get('/home', function (req,res) {
+    if(req.session.loggedin) {
+        res.render('home', {user: req.session.user, homeCSS: true})
+    } else {
+        res.render('login', {loginCSS: true});
+    }   
+});
 
-router.get('/getUser', userController.getUser);
-router.get('/getAllUser', userController.getAllUser);
+router.get('/logout', userController.logout);
 router.post('/auth',userController.authentication);
+router.post('/about', userController.about);
+router.post('/register', userController.register);
+
+router.post('/editUser');
+
+router.get('/home');
+
+router.get('/profile')
+
+
 
 module.exports = router;
 

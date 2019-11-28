@@ -33,10 +33,6 @@ app.use(express.static(path.join(__dirname,'public')));
 
 
 
-app.get('/', function (req,res) {
-    res.render('login', {loginCSS: true});
-});
-
 let userRoutes = require('./routes/user');
 app.use(userRoutes);
 
