@@ -1,23 +1,58 @@
 {{> header }}
 <div id="home">
     <div id="home-content">
+        <!-- todo put sections into partials -->
         <div class="profile-section">
-            <img scr={{user.image}} alt="image not found"/>
+            <div class="profile-img">
+                <img src={{user.image}} alt="image not found"/>
+            </div>
+            
             <div class="profile-info">
-                <h2>{{user.fname}}</h2>
-                <h2>{{user.lname}}</h2>
+                <h2>{{user.fname}} {{user.lname}}</h2>
                 <h3>{{user.about}}</h3>
             </div>
+
             <div class="profile-stats">
-                <a>posts</a>
-                <a>Messages</a>
-                <a>Likes</a>
+                <div class="div-row">
+                    <div class="div-cell"><a>posts</a></div>
+                    <div class="div-cell"><a></a></div>
+                </div>
+                <div class="div-row">
+                    <div class="div-cell"><a>Messages</a></div>
+                    <div class="div-cell"></div>
+                </div>
+                <div class="div-row">
+                    <div class="div-cell"><a>Likes</a></div>
+                    <div class="div-cell">{{user.likes}}</div>
+                </div>  
             </div>
             <div class="edit-profile">
-                <a>edit profile</a>
+                <a href="/editProfile">Edit Profile</a>
             </div>
-
         </div>
-        <div class="post-section"></div>
+        <!-- put in partials -->
+        <div class="post-section">
+            <div class="post-form">
+                <h2>Whats your question today?</h2>
+                <form action="/writepost" method="post">
+                    <input type="text" name="subject" placeholder="Subject" autocomplete="off" required>
+                    <input type="textarea" name="content" placeholder="Explain in detail" autocomplete="off" required>
+                    <select name="topic" required>
+                        <option value=""></option>
+                        <option value="php">PHP</option>
+                        <option value="nodejs">NodeJs</option>
+                        <option value="java">JAVA</option>
+                        <option value="sql">SQL</option>
+                        <option value="zend">Zend</option>
+                    </select>
+                    <input type="submit" value="Post to timeline">
+                </form>
+            </div>
+            <div class="post-list">
+                {{#each posts}}
+                    {{> postcard postcard=posts}}
+                {{/each}}
+            </div>
+        </div>
     </div>
 </div>

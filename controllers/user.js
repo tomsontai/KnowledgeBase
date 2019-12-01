@@ -1,4 +1,5 @@
 let db = require('../models/userdb');
+let postdb = require('../models/postdb');
 
 /*
 exports.testConnection = (req, res, next) => {
@@ -10,6 +11,39 @@ exports.logout = (req,res, next) => {
     req.session.loggedin = false;
     req.session.user = null;
     res.redirect('/');
+}
+
+exports.home = (req, res, next) => {
+    if(req.session.loggedin) {
+        var id = req.session.user.id;
+        let Home = db.getUser(id);
+        Home.then( ([user, filedData]) => {
+            if (user.length == 0) {
+                //todo, ajust the position and style of the error message
+                let errorMessage = "User not exists";
+                res.render('login', { InvalideLogin: errorMessage, loginCSS: true });
+            } else {
+                req.session.user = user[0];
+                let recentPosts = [];
+                let RecentPosts = postdb.getRecentPosts();
+                RecentPosts.then( ([posts, filedData]) => {
+                    for (let i = 0; i < posts.length; i++) {
+                        recentPosts.push(posts[i]);
+                    }
+
+                    req.session.posts = recentPosts;
+                    console.log(recentPosts);
+                    res.render('home', {
+                        user: req.session.user,
+                        posts: req.session.posts,
+                        homeCSS: true
+                    });
+                });
+            }
+        });
+    } else {
+        res.render('login', {loginCSS: true});
+    }  
 }
 
 
@@ -57,7 +91,7 @@ exports.register = (req, res, next) => {
             // req.session.sessionId = result.insertId;
             req.session.loggedin = true;
             req.session.user = user;
-            res.render('home', {user: user, homeCSS: true})
+            res.redirect('/home');
         });
     } else {
         //todo, ajust the position and style of the error message
@@ -75,11 +109,42 @@ exports.about = (req, res, next) => {
     // need to check if email exists in db already
 
     if (firstName && lastName && password && email) {
-        req.session.email = email;
-		req.session.firstName = firstName;
-		req.session.lastName = lastName;
-        req.session.password = password;
-        res.render('about', {loginCSS: true});
-        console.log(req.body);
+        let EmailExists = db.emailCheck(email);
+        EmailExists.then( ([user, filedData]) => {
+            if (user.length == 0) {
+                req.session.email = email;
+                req.session.firstName = firstName;
+                req.session.lastName = lastName;
+                req.session.password = password;
+                res.render('about', {loginCSS: true});
+                console.log(req.body);
+            } else {
+                // res.send(user[0]);
+                // req.session.sessionId = user[0].id;
+                console.log(req.session);
+                res.redirect('/');
+            }
+        });
+        
     }
+}
+
+exports.update = (req, res, next) => {
+    const user = {
+        id: req.session.user.id,
+        email: req.session.user.email,
+		password: req.session.user.password,
+		fname: req.body.fname,
+		lname: req.body.lname,
+		country: req.body.country,
+		about: req.body.about,
+		image: req.body.image,
+		dob: req.body.dob
+    }
+
+    let Update = db.update(user);
+    Update.then( ([result, filedData]) => {
+        console.log(result);
+        res.redirect('/home');
+    });
 }
