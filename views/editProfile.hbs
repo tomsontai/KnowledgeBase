@@ -1,0 +1,17 @@
+<div class="editProfile">
+    <div class="about-logo">
+        <div class="main-logo"><h1>knowledgeBase</h1></div>
+        <p>Update your profile</p>
+    </div>
+    <div class="edit-profile-form">
+        <form action="updateProfile" method="POST">
+            First Name: <input type="text" name="fname" autocomplete="off" value={{user.fname}} required>
+			Last Name: <input type="text" name="lname" autocomplete="off"  required value={{user.lname}}>
+            Profile Picture: <input type="text" name="image" autocomplete="off" value={{user.image}} required>
+            About yourself: <input type="textarea" name="about" autocomplete="off" value={{user.about}} required>
+            Country: <input type="text" name="country" value={{user.country}} required>
+            Date of Birth: <input type="text" name="dob" value={{user.dob}} required>
+            <input type="submit" value="Update Profile" >	
+        </form>
+    </div>
+</div>

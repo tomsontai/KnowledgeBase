@@ -3,21 +3,71 @@
 }
 
 #home-content {
-    max-width: 800px;
+    width: 80%;
     margin: auto;
     background: white;
 }
 
 .profile-section{
-    width: 50%;
+    width: 40%;
     float: left;
+    text-align: center;
+}
+
+.profile-img {
+    margin-top: 30px;
+}
+
+.profile-stats {
+    display: table;
+    width: 60%;
+    background-color:grey;
+    border:1px solid  #666666;
+    margin: auto;
+}
+
+.div-row {
+    display: table-row;
+    width:auto;
+}
+
+.div-cell {
+    height: 50px;
+    display: table-cell;
+    width: 50%;
 }
 
 .post-section {
-    width: 50%;
+    width: 60%;
     float: right;
 }
 
+input[type="submit"] {
+    width: 50%;
+    padding: 15px;
+    background-color: blue;
+    border: 0;
+    box-sizing: border-box;
+    cursor: pointer;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+input {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #dddddd;
+    margin-bottom: 15px;
+    box-sizing:border-box;
+}
+
+select {
+    width: 40%;
+    box-sizing: border-box;
+    padding: 15px;
+    font-weight: bold;
+    height: 40px;
+}
 
 
 

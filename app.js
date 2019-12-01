@@ -4,6 +4,7 @@ let path = require("path");
 let fs = require("fs");
 let util = require('util');
 var session = require('express-session');
+let cookieParser = require('cookie-parser');
 
 let app = express();
 
@@ -21,10 +22,12 @@ app.engine(
 app.set('view engine', 'hbs');
 app.set('views', 'views');
 
+app.use(cookieParser());
 app.use(session({
 	secret: 'secret',
 	resave: true,
-	saveUninitialized: true
+    saveUninitialized: false,
+    cookie: {maxAge:900000}
 }));
 app.use(bodyParser.urlencoded({ extended: false })); 
 app.use(bodyParser.json());
