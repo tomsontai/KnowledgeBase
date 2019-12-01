@@ -5,7 +5,7 @@ function getAllUser() {
 }
 
 function getUser(id) {
-    return db.execute('SELECT * FROM user WHERE id = ?', [id]);
+    return db.execute('SELECT user.*, COUNT(post.iduser) AS posts FROM user, post WHERE user.id = ? ', [id]);
 }
 
 function auth(email, password) {
