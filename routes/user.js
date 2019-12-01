@@ -5,7 +5,6 @@ const postController = require('../controllers/post');
 const router = express.Router();
 
 
-
 router.get('/', function (req,res) {
     if(req.session.loggedin) {
         res.render('home', {user: req.session.user, homeCSS: true});
@@ -37,20 +36,11 @@ router.post('/updateProfile', userController.update);
 
 
 
-// router.get('/profile')
-
-
 // post routes, seperate later
 router.post('/writepost', postController.write);
+router.post('/myPosts');
 
 
 module.exports = router;
 
 
-/*
-router.get('/testConnection', userController.testConnection);
-router.get('/testSession', function(request, response) {
-    request.session.username = 'test';
-    console.log(request.session);
-});
-*/

@@ -30,9 +30,7 @@ exports.home = (req, res, next) => {
                     for (let i = 0; i < posts.length; i++) {
                         recentPosts.push(posts[i]);
                     }
-
                     req.session.posts = recentPosts;
-                    console.log(recentPosts);
                     res.render('home', {
                         user: req.session.user,
                         posts: req.session.posts,
@@ -63,7 +61,6 @@ exports.authentication = (req, res, next) => {
                 // req.session.sessionId = user[0].id;
                 req.session.loggedin = true;
                 req.session.user = user[0];
-                console.log(req.session);
                 res.redirect('/home')
             }
         });

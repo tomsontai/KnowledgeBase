@@ -4,7 +4,9 @@
         <!-- todo put sections into partials -->
         <div class="profile-section">
             <div class="profile-img">
-                <img src={{user.image}} alt="image not found"/>
+                <object data={{user.image}} type="image/png">
+                    <img src="/img/defaultAvatar.png" alt="Default Avatar"/>
+                </object>
             </div>
             
             <div class="profile-info">
@@ -15,7 +17,7 @@
             <div class="profile-stats">
                 <div class="div-row">
                     <div class="div-cell"><a>posts</a></div>
-                    <div class="div-cell"><a></a></div>
+                    <div class="div-cell"><a>{{user.posts}}</a></div>
                 </div>
                 <div class="div-row">
                     <div class="div-cell"><a>Messages</a></div>
@@ -48,6 +50,22 @@
                     <input type="submit" value="Post to timeline">
                 </form>
             </div>
+
+            <div class="search-topic">
+                <form action="/searchtopic" method="post">
+                    Pick a topic: 
+                    <select name="topic" required>
+                        <option value=""></option>
+                        <option value="php">PHP</option>
+                        <option value="nodejs">NodeJs</option>
+                        <option value="java">JAVA</option>
+                        <option value="sql">SQL</option>
+                        <option value="zend">Zend</option>
+                    </select>
+                    <input class="search-submit" type="submit" value="GO">
+                </form>
+            </div>
+
             <div class="post-list">
                 {{#each posts}}
                     {{> postcard postcard=posts}}
