@@ -1,44 +1,49 @@
 {{> header }}
-<div id="home">
-    <div id="home-content">
+<div class="container-fluid" id="home">
+    <div class="row" id="home-content">
         <!-- todo put sections into partials -->
-        <div class="profile-section">
+        <div class="col-sm-4">
             <div class="profile-img">
                 <object data={{user.image}} type="image/png">
-                    <img src="/img/defaultAvatar.png" alt="Default Avatar"/>
+                    <img class="img-circle" src="/img/defaultAvatar.png" alt="Default Avatar"/>
                 </object>
             </div>
             
             <div class="profile-info">
-                <h2>{{user.fname}} {{user.lname}}</h2>
-                <h3>{{user.about}}</h3>
+                <h2 id="profileName">{{user.fname}} {{user.lname}}</h2>
+                <h3 id="profileDesc">{{user.about}}</h3>
             </div>
 
-            <div class="profile-stats">
-                <div class="div-row">
-                    <div class="div-cell"><a>posts</a></div>
-                    <div class="div-cell"><a>{{user.posts}}</a></div>
-                </div>
-                <div class="div-row">
-                    <div class="div-cell"><a>Messages</a></div>
-                    <div class="div-cell"></div>
-                </div>
-                <div class="div-row">
-                    <div class="div-cell"><a>Likes</a></div>
-                    <div class="div-cell">{{user.likes}}</div>
-                </div>  
-            </div>
+
+            <table class="table table-condensed">
+                    <tbody>
+                    <tr>
+                        <td>posts</td>
+                        <td><a>{{user.posts}}</a></td>
+                    <tr>
+                        <td>messages</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>likes</td>
+                        <td>{{user.likes}}</td>
+                    </tr>
+                </tbody>
+            </table>
+
             <div class="edit-profile">
                 <a href="/editProfile">Edit Profile</a>
             </div>
         </div>
+
+
         <!-- put in partials -->
-        <div class="post-section">
+        <div class="col-sm-8" id="secondCol">
             <div class="post-form">
-                <h2>Whats your question today?</h2>
+                <h2 id="questionTitle">Whats your question today?</h2>
                 <form action="/writepost" method="post">
                     <input type="text" name="subject" placeholder="Subject" autocomplete="off" required>
-                    <input type="textarea" name="content" placeholder="Explain in detail" autocomplete="off" required>
+                    <textarea id="textbox" name="content" placeholder="Explain in detail" rows="5"></textarea>
                     <select name="topic" required>
                         <option value=""></option>
                         <option value="php">PHP</option>
@@ -47,13 +52,13 @@
                         <option value="sql">SQL</option>
                         <option value="zend">Zend</option>
                     </select>
-                    <input type="submit" value="Post to timeline">
+                    <input id="timelineBtn" type="submit" value="post to timeline">
                 </form>
             </div>
 
             <div class="search-topic">
                 <form action="/searchtopic" method="post">
-                    Pick a topic: 
+                    <span id="topicTitle"><b>Search by topic:</b></span>
                     <select name="topic" required>
                         <option value=""></option>
                         <option value="php">PHP</option>
@@ -62,13 +67,13 @@
                         <option value="sql">SQL</option>
                         <option value="zend">Zend</option>
                     </select>
-                    <input class="search-submit" type="submit" value="GO">
+                    <input class="search-submit" type="submit" value="go">
                 </form>
             </div>
 
             <div class="post-list">
                 {{#each posts}}
-                    {{> postcard postcard=posts}}
+                    {{> postcard post=posts}}
                 {{/each}}
             </div>
         </div>
