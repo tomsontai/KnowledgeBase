@@ -14,7 +14,6 @@ toggleReplies = (idpost) => {
 }
 
 addReply = async (idpost, message) => {
-    console.log(idpost+message);
     const res = await fetch("/post/addReply", {
         method: "POST",
         headers: {

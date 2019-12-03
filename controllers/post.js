@@ -21,7 +21,6 @@ exports.getReplies = (req, res, next) => {
     console.log(idpost);
     let Replies = replydb.getReplies(idpost);
     Replies.then( ([result, filedData]) => {
-        console.log(result);
         res.send(result);
     });
 }
@@ -38,6 +37,23 @@ exports.addReply = (req, res, next) => {
         res.send(result);
     });
     
-    
+}
+
+exports.searchSubject = (req, res, next) => {
+    let key = req.body.search;
+    let SearchResult = db.searchBySubject(key);
+    SearchResult.then( ([posts, fieldData]) => {
+        if (posts.length == 0) {
+            res.render('searchResult', {
+                error: true,
+                homeCSS: true
+            });
+        } else {
+            res.render('searchResult', {
+                posts: posts,
+                homeCSS: true
+            });
+        }  
+    });
 }
 

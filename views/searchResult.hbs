@@ -1,0 +1,13 @@
+{{> header }}
+
+{{#if error}}
+    <div class="error">
+        <div><p>Sorry, there is no posts matches your search! Please enter another key word or</p></div>
+        <div><a href="/home">Go back to home page</a></div>
+    </div>
+{{/if}}
+<div class="post-list">
+    {{#each posts}}
+        {{> postcard post=posts}}
+    {{/each}}
+</div>

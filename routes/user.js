@@ -39,6 +39,7 @@ router.post('/updateProfile', userController.update);
 // post routes, seperate later
 router.post('/writepost', postController.write);
 router.post('/myPosts');
+router.post('/searchSubject', postController.searchSubject)
 
 // reply routes, seperate later
 router.get("/post/:idpost/replies", postController.getReplies);
