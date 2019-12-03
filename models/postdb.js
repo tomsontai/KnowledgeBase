@@ -15,7 +15,22 @@ function writePost(post) {
 }
 
 function getRecentPosts() {
-    return db.execute('SELECT p.*, image from post AS p, user WHERE p.iduser = user.id ORDER BY idpost DESC LIMIT 5');
+    return db.execute(`SELECT p.*, image, count(reply.idreply) AS replies
+                       From post AS p 
+                       LEFT JOIN reply ON p.idpost = reply.idpost
+                       LEFT JOIN user ON p.iduser = user.id 
+                       GROUP BY p.idpost
+                       ORDER BY idpost DESC LIMIT 5`);
+}
+
+function searchBySubject(key) {
+    let pattern = '%' + key + '%';
+    return db.execute(`SELECT p.*, image, count(reply.idreply) AS replies
+                       From post AS p 
+                       LEFT JOIN reply ON p.idpost = reply.idpost
+                       LEFT JOIN user ON p.iduser = user.id 
+                       WHERE p.subject LIKE ?
+                       GROUP BY p.idpost`, [pattern]);
 }
 
 module.exports = {
@@ -23,5 +38,6 @@ module.exports = {
     getPost         :   getPost,
     getPostByUser   :   getPostByUser,
     writePost       :   writePost,
-    getRecentPosts  :   getRecentPosts
+    getRecentPosts  :   getRecentPosts,
+    searchBySubject :   searchBySubject
 }

@@ -24,13 +24,9 @@ exports.home = (req, res, next) => {
                 res.render('login', { InvalideLogin: errorMessage, loginCSS: true });
             } else {
                 req.session.user = user[0];
-                let recentPosts = [];
                 let RecentPosts = postdb.getRecentPosts();
                 RecentPosts.then( ([posts, filedData]) => {
-                    for (let i = 0; i < posts.length; i++) {
-                        recentPosts.push(posts[i]);
-                    }
-                    req.session.posts = recentPosts;
+                    req.session.posts = posts;
                     res.render('home', {
                         user: req.session.user,
                         posts: req.session.posts,
