@@ -1,20 +1,27 @@
-<section class="post-card">
-    <div class="postcard-image">
-        <object data={{this.image}} type="image/png">
-            <img src="/img/defaultAvatar.png" alt="Default Avatar"/>
-        </object>
-    </div>
-    <div class="postcard-body">
-        <div class="postcard-title">
-            <div class="postcard-subject"><b>Subject: {{this.subject}}</b></div>
-            <div class="postcard-topic">{{this.topic}}</div>
-        </div>  
-        <div class="postcard-content">
-            <p>{{this.content}}</p>
-        </div> 
-        <div class="postcard-bottom">
-            <p class="postcard-created">{{this.created}}</p>
-            <p class="postcard-replies"><a>{{this.replies}} replies</a></p>
+<section class="container-fluid">
+    <div class="row">
+        <div class="postcard-image">
+            <object data={{this.image}} type="image/png">
+                <img class="img-circle" id="posterIMG" src="/img/defaultAvatar.png" alt="Default Avatar"/>
+            </object>
+        </div>
+        <div class="postcard-body">
+            <div class="postcard-title">
+                <div class="postcard-subject"><b>Subject: {{this.subject}}</b></div>
+                <div class="postcard-topic">{{this.topic}}</div>
+            </div>  
+            <div class="postcard-content">
+                <p>{{this.content}}</p>
+            </div> 
+            <div class="postcard-bottom">
+                <p class="postcard-created">{{this.created}}</p>
+                <p class="postcard-replies"><a>{{this.replies}} replies</a></p>
+            </div>
+        </div>
+        <div class="comments">
+            {{#each comments}}
+                    {{> postcard post=posts}}
+            {{/each}}
         </div>
     </div>
 </section>
