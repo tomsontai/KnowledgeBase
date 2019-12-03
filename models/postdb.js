@@ -15,7 +15,12 @@ function writePost(post) {
 }
 
 function getRecentPosts() {
-    return db.execute('SELECT p.*, image from post AS p, user WHERE p.iduser = user.id ORDER BY idpost DESC LIMIT 5');
+    return db.execute(`SELECT p.*, image, user.id AS iduser, count(reply.idreply) AS replies
+                       From post AS p 
+                       LEFT JOIN reply ON p.idpost = reply.idpost
+                       LEFT JOIN user ON p.iduser = user.id 
+                       GROUP BY p.idpost
+                       ORDER BY idpost DESC LIMIT 5`);
 }
 
 module.exports = {

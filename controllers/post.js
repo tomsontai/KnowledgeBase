@@ -1,5 +1,6 @@
 let db = require('../models/postdb');
 let userdb = require('../models/userdb');
+let replydb = require('../models/replydb');
 
 exports.write = (req, res, next) => {
     const post = {
@@ -11,14 +12,32 @@ exports.write = (req, res, next) => {
 
     let WritePost = db.writePost(post);
     WritePost.then(result => {
-        console.log(result);
         res.redirect('/home');
-        console.log(req.session);
     });
 }
 
+exports.getReplies = (req, res, next) => {
+    let idpost = req.params.idpost;
+    console.log(idpost);
+    let Replies = replydb.getReplies(idpost);
+    Replies.then( ([result, filedData]) => {
+        console.log(result);
+        res.send(result);
+    });
+}
 
-exports.getLatestFive = (req, res, next) => {
-    let PostList = db.getRecentPosts();
+exports.addReply = (req, res, next) => {
+    const reply = {
+        iduser : req.session.user.id,
+        idpost : req.body.idpost,
+        message: req.body.message
+    }
+
+    let Add = replydb.addReply(reply);
+    Add.then(result => {
+        res.send(result);
+    });
+    
     
 }
+

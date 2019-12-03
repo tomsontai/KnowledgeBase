@@ -40,6 +40,10 @@ router.post('/updateProfile', userController.update);
 router.post('/writepost', postController.write);
 router.post('/myPosts');
 
+// reply routes, seperate later
+router.get("/post/:idpost/replies", postController.getReplies);
+router.post("/post/addReply", postController.addReply);
+
 
 module.exports = router;
 
