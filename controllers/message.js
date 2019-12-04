@@ -6,12 +6,14 @@ exports.startConversation = (req, res) => {
 
     let datetime = new Date();
     let id = req.body.recipientId;
+
+    console.log(id);
     let conversation = {
         idsender:       req.session.user.id,
         idrecipient:    id,
         subject:        req.body.subject,
         // message:        req.body.details,
-        // time:           datetime
+        date:           datetime
     };
 
     let newConvo = messagedb.startConversation(conversation);
