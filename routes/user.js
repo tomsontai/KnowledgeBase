@@ -31,6 +31,7 @@ router.get('/editProfile', function (req, res) {
 });
 
 router.post('/updateProfile', userController.update);
+router.get('/profile/:id/like', userController.likeUser);
 
 
 

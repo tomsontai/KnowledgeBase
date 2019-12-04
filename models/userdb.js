@@ -29,6 +29,9 @@ function getImage(id) {
     return db.execute('SELECT image FROM user where id = ? ', [id]);
 }
 
+function likeUser(id) {
+    return db.execute(`UPDATE user SET likes = likes + 1 where id = ? `, [id]);
+}
 module.exports = {
     // testConnection : testConnection,
     getUser     : getUser,
@@ -37,7 +40,8 @@ module.exports = {
     register    : registerUser,
     emailCheck  : emailCheck,
     update      : updateProfile, 
-    getImage    : getImage  
+    getImage    : getImage,
+    likeUser    : likeUser  
 }
 
 
