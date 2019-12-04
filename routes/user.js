@@ -51,7 +51,7 @@ router.get("/profile/:id", userController.profile);
 
 router.get("/message/:id", userController.message);
 
-router.post("/message/startConversation", messageController.startConversation);
+// router.post("/message/startConversation", messageController.startConversation);
 
 module.exports = router;
 
