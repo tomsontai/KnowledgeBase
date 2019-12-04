@@ -99,7 +99,7 @@ createReplyNode = (img, message, iduser) => {
     userLink.href = "/profile/" + iduser;
 
     imageObject.data=img;
-    imageObject.type="image/png+jpg";
+    imageObject.type="image/png";
 
     imageDefault.className="replyIMG";
     imageDefault.src="/img/defaultAvatar.png";
