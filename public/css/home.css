@@ -98,7 +98,39 @@ select {
 
 /* Temprory stores header css here, might need to seperate later */
 
+#navbar {
+    background-color: #DCDCDC;
+}
 
+#headerLogo{
+    margin-top:13px;
+}
+
+#k {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size:50px;
+}
+
+#b {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size:50px;
+    color: #00BFFF;
+}
+
+#searchBar{
+    margin-top:15px;
+    width:500px;
+    font-style:italic;
+}
+
+#searchBarBtn{
+    background-color: #1E90FF;
+    color: white;
+}
+
+#links{
+    margin-top:13px;
+}
 
 
 
@@ -188,8 +220,7 @@ select {
 #reply-3,
 #reply-4,
 #page,
-#postNum,
-#prevPaginate {
+#postNum {
     display: none;
 }
 
