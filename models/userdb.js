@@ -5,7 +5,9 @@ function getAllUser() {
 }
 
 function getUser(id) {
-    return db.execute('SELECT user.*, COUNT(post.iduser) AS posts FROM user, post WHERE user.id = ? AND post.iduser = user.id ', [id]);
+    return db.execute(`select user.*, count(post.iduser) AS posts,
+    (select count(*) from conversation where idsender= ? or idrecipient= ? ) as message
+    from user, post where user.id = ? and post.iduser = user.id`, [id, id, id]);
 }
 
 function auth(email, password) {
