@@ -1,5 +1,6 @@
 let db = require('../models/userdb');
 let postdb = require('../models/postdb');
+let messagedb = require('../models/messagedb');
 
 /*
 exports.testConnection = (req, res, next) => {
@@ -217,19 +218,11 @@ exports.message = (req,res,next) => {
 }
 
 exports.conversations = (req, res, next) => {
-    let iduser = req.params.id;
-    let Profile = db.getUser(iduser);
-    Profile.then ( ([data, fieldData])  => {
-        if (data.length == 0) {
-            //todo, ajust the position and style of the error message
-            let errorMessage = "User not exists";
-            res.redirect("/home");
-        } else {
-            let user = data[0];
-            res.render('conversations', {
-                user: user,
-                homeCSS: true
-            });
-        }
+    const userId = req.session.user.id;
+    let convoList = messagedb.getConversations(userId);
+    convoList.then(([conversations, filedData]) => {
+        res.render('conversations', {
+            conversations: conversations
+        });
     });
 }

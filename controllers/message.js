@@ -60,12 +60,12 @@ exports.startConversation = (req, res) => {
 
 }
 
-exports.getUserConversations = (req,res) => {
-    const userId = req.session.user.id;
-    let convoList = messagedb.getConversations(userId);
-    convoList.then(([conversations, filedData]) => {
-        res.render('conversations', {
-            conversations: conversations
-        });
-    });
-}
+// exports.getUserConversations = (req,res) => {
+//     const userId = req.session.user.id;
+//     let convoList = messagedb.getConversations(userId);
+//     convoList.then(([conversations, filedData]) => {
+//         res.render('conversations', {
+//             conversations: conversations
+//         });
+//     });
+// }
