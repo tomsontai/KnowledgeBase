@@ -1,7 +1,34 @@
 {{> header}}
 
-<div class="post-list" id="userConversations">
+<div class="conversation" id="userConversations">
     {{#each conversations}}
         {{> convoCard conversations=conversations}}
     {{/each}}
 </div>
+
+<div class="message-section">
+    {{#each messages}}
+        <div>
+            <object data={{this.image}} type="image/png">
+                <img class="img-circle" id="posterIMG" src="/img/defaultAvatar.png" alt="Default Avatar"/>
+            </object>
+        </div>
+        <div>{{this.content}}</div>
+    {{/each}}
+</div>
+
+{{#if messages}}
+<div class="message-post">
+    <div class="col-sm-8" id="rightCol">
+        <div class="form-section">
+        <div class="message-form">
+            <form name=messageSubmit action="sendMessage" method=POST>
+                <textarea id="msgDetails" type="text" name="content" placeholder="message details..." rows="5"></textarea>
+                <br>
+                <input id="messageBTN" type="submit" value="Message">
+                <input type="hidden" value={{currentIdConv}} name="idconversation">
+            </form>
+        </div>
+    </div>
+</div>
+{{/if}}

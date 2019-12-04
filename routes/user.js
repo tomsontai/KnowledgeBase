@@ -2,6 +2,7 @@ const express = require('express');
 const userController = require('../controllers/user');
 const postController = require('../controllers/post');
 const messageController = require('../controllers/message');
+const messageController2 = require('../controllers/message2');
 
 const router = express.Router();
 
@@ -58,6 +59,10 @@ router.get("/message/:id", userController.message);
 router.get("/conversations/:id", messageController.getUserConversations);
 
 router.post("/message/startConversation", messageController.startConversation);
+
+router.get("/conversations/:id", messageController2.startConversation);
+router.get("/showMessages/:id", messageController2.showMessage);
+router.post("/showMessages/sendMessage", messageController2.addMessage);
 
 module.exports = router;
 

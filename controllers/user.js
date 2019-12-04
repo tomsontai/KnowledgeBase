@@ -204,7 +204,6 @@ exports.message = (req,res,next) => {
     Profile.then ( ([data, fieldData])  => {
         if (data.length == 0) {
             //todo, ajust the position and style of the error message
-            let errorMessage = "User not exists";
             res.redirect("/home");
         } else {
             let user = data[0];
