@@ -18,6 +18,12 @@ function createMessage(message) {
     return db.query('INSERT INTO message SET ?', [message]);
 }
 
+function getMessage(id) {
+    return db.execute(`SELECT message.*, image
+                        FROM message, user
+                        WHERE message.idconversation = ? AND user.id = message.idsender `, [id]);
+}
+
 function getConversationMessages(conversationId) {
     let sql =
     `
@@ -34,5 +40,6 @@ function getConversationMessages(conversationId) {
  module.exports = {
     startConversation:      startConversation,
     createMessage:          createMessage,
-    getConversations:       getConversations
+    getConversations:       getConversations,
+    getMessage:             getMessage
  };
