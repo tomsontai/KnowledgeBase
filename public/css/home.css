@@ -209,3 +209,8 @@ select {
 }
 
 
+#reply-2,
+#reply-3,
+#reply-4 {
+    display: none;
+}

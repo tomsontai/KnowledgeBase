@@ -73,17 +73,22 @@
                 </form>
             </div>
 
-            <div class="post-list" id="post-list-{{posts.length}}>
-                
-                
-                {{posts.length}}
-                
+            <div class="post-list">
+                <div id="page">0</div>
+                <div id="postNum">{{posts.length}}</div>
                 {{#each this.posts as |post|}}
                     <div id="reply-{{@index}}">
                     {{> postcard post=post}}
                     </div>
                 {{/each}}
-                
+            </div>
+            <div class="paginate">
+                <div>
+                <button id="prevPaginate" onclick="previousPage()">Previous</button>
+                </div>
+                <div>
+                <button id="nextPaginate" onclick="nextPage()">Next</button>
+                </div>
             </div>
         </div>
     </div>

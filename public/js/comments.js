@@ -1,7 +1,3 @@
-test = (idpost, message) => {
-    alert(idpost+message);
-}
-
 toggleReplies = (idpost) => {
     const replySection = document.getElementById("comments-section-" + idpost);
     if (!replySection.hasChildNodes()) {
@@ -114,6 +110,88 @@ createReplyNode = (img, message) => {
 
     return replyDiv;
 }
+
+
+
+nextPage = () => {
+    const postNum = document.getElementById("postNum").innerText;
+    const curPage = document.getElementById("page").innerText;
+
+    let page = +curPage + 1;
+    let fullPage = ((page + 1) * 2) <= postNum;
+    let hasNextPage = ((page + 1) * 2) < postNum;
+    console.log(hasNextPage);
+
+    showNextPage(page);
+    document.getElementById("page").innerText = page;
+    document.getElementById("prevPaginate").style.display = "block";
+
+    if (!hasNextPage) {
+        document.getElementById("nextPaginate").style.display = "none";
+    } 
+}
+
+showNextPage = (page) => {
+    let one = page * 2;
+    let two = page * 2 + 1;
+    let previousOne = (page - 1) * 2;
+    let previousTwo = (page - 1) * 2 + 1;
+    let nodeOne = document.getElementById("reply-" + +one);
+    let nodeTwo = document.getElementById("reply-" + +two);
+    let previousNodeOne = document.getElementById("reply-" + +previousOne);
+    let previousNodeTwo = document.getElementById("reply-" + +previousTwo);
+    if (nodeOne) {
+        nodeOne.style.display = "block";
+    }
+
+    if (nodeTwo) {
+        nodeTwo.style.display = "block";
+    }
+
+    previousNodeOne.style.display = "none";
+    previousNodeTwo.style.display = "none";
+}
+
+previousPage = () => {
+    const curPage = document.getElementById("page").innerText;
+    let page = +curPage - 1;
+    showPreviousPage(page);
+    document.getElementById("page").innerText = page;
+    document.getElementById("nextPaginate").style.display = "block";
+
+    if (page == 0) {
+        document.getElementById("prevPaginate").style.display = "none";
+    }
+}
+
+showPreviousPage = (page) => {
+    let one = page * 2;
+    let two = page * 2 + 1;
+    let previousNodeOne = document.getElementById("reply-" + +one);
+    let previousNodeTwo = document.getElementById("reply-" + +two);
+    previousNodeOne.style.display = "block";
+    previousNodeTwo.style.display = "block";
+
+    let curOne = (page + 1) * 2;
+    let curTwo = (page + 1) * 2 + 1;
+    let nodeOne = document.getElementById("reply-" + +curOne);
+    let nodeTwo = document.getElementById("reply-" + +curTwo);
+
+    if (nodeOne) {
+        nodeOne.style.display = "none";
+    }
+
+    if (nodeTwo) {
+        nodeTwo.style.display = "none";
+    }
+
+
+}
+
+
+
+
+
 
 
 
