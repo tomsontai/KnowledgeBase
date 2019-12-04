@@ -220,7 +220,8 @@ select {
 #reply-3,
 #reply-4,
 #page,
-#postNum {
+#postNum,
+#prevPaginate {
     display: none;
 }
 

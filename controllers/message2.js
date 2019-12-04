@@ -6,6 +6,7 @@ exports.startConversation = (req, res, next) => {
     let Conversation = db.getConversations(id);
     Conversation.then ( ([conversations, fieldData]) => {
         req.session.conversations = conversations;
+        console.log(conversations);
         res.render('conversations', {
             conversations: conversations,
             messageCSS: true
@@ -26,7 +27,8 @@ exports.showMessage = (req, res, next) => {
                         conversations: conversations,
                         messages: messages,
                         messageCSS: true,
-                        currentIdConv: idconv
+                        currentIdConv: idconv,
+                        open: true
                 });
             });
         });
@@ -44,9 +46,32 @@ exports.addMessage = (req, res, next) => {
         time: datetime
     }
 
+    
     let newMsg = db.createMessage(message);
     newMsg.then(result => {
         res.redirect("/showMessages/" + req.body.idconversation);
+    });
+
+}
+
+exports.addConversation = (req, res, next) => {
+    let datetime = new Date();
+    let id = req.body.recipientId;
+    console.log(id);
+
+    let conversation = {
+        idsender: req.session.user.id,
+        idrecipient:    id,
+        subject:        req.body.subject,
+        // message:        req.body.details,
+        date:           datetime
+
+    }
+
+    let Conv = db.startConversation(conversation);
+    Conv.then(result => {
+        console.log(result.insertId);
+        res.redirect("/showMessages/" + result.insertId);
     });
 
 }
