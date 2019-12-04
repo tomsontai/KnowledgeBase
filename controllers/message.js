@@ -30,11 +30,9 @@ exports.startConversation = (req, res) => {
     
         let newMsg = messagedb.createMessage(message);
         newMsg.then(([result, filedData]) => {
-            console.log(result[0]);
+           // console.log(result[0]);
         })
     });
-
-    
 
     let Profile = db.getUser(id);
     Profile.then ( ([data, fieldData])  => {
@@ -46,7 +44,6 @@ exports.startConversation = (req, res) => {
             let user = data[0];
             let UserPosts = postdb.getPostByUser(id);
             UserPosts.then( ([posts, filedData]) => {
-                console.log(posts);
                 res.render('profile', {
                     user: user,
                     posts: posts,
@@ -61,4 +58,14 @@ exports.startConversation = (req, res) => {
     //     console.log(data);
     // })
 
+}
+
+exports.getUserConversations = (req,res) => {
+    const userId = req.session.user.id;
+    let convoList = messagedb.getConversations(userId);
+    convoList.then(([conversations, filedData]) => {
+        res.render('conversations', {
+            conversations: conversations
+        });
+    });
 }

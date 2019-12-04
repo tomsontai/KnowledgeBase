@@ -1,24 +1,17 @@
 let db = require('../util/database');
 
 function startConversation(conversation) {
-    // let sql =
-    // `
-    //     INSERT INTO conversation 
-    //     VALUES (${conversation.senderId}, ${conversation.recipientId}, ${conversation.subject})
-    // `
-    
-    // return db.query(sql);
     return db.query('INSERT INTO conversation SET ? ', [conversation]);
 }
 
 function getConversations(userId) {
-    let sql =
-    `
-        SELECT *
-        FROM conversation c
-        WHERE c.idsender = ${userId} OR c.idrecipient = ${userId};
-    `
-    return db.execute(sql);
+    
+    return db.execute(`SELECT p.*, user.fname, user.lname FROM
+        (
+            SELECT DISTINCT if(idsender=1, idrecipient, idsender) AS id, idconversation, subject, date
+            FROM conversation
+            WHERE (idsender = ? OR idrecipient = ?)
+        ) as p left join user on p.id = user.id`, [userId, userId]);
 }
 
 function createMessage(message) {
@@ -38,12 +31,8 @@ function getConversationMessages(conversationId) {
 
 
 
-
-
-
-
-
  module.exports = {
     startConversation:      startConversation,
-    createMessage:          createMessage
+    createMessage:          createMessage,
+    getConversations:       getConversations
  };
