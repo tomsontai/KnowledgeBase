@@ -144,6 +144,7 @@ exports.update = (req, res, next) => {
 
 exports.profile = (req, res, next) => {
     let iduser = req.params.id;
+    console.log(iduser);
     let Profile = db.getUser(iduser);
     Profile.then ( ([data, fieldData])  => {
         if (data.length == 0) {
@@ -154,13 +155,28 @@ exports.profile = (req, res, next) => {
             let user = data[0];
             let UserPosts = postdb.getPostByUser(iduser);
             UserPosts.then( ([posts, filedData]) => {
-                console.log(posts);
                 res.render('profile', {
                     user: user,
                     posts: posts,
                     profileCSS: true
                 });
             });
+        }
+    });
+}
+
+exports.message = (req,res,next) => {
+    let iduser = req.params.id;
+    console.log(iduser);
+    let Profile = db.getUser(iduser);
+    Profile.then ( ([data, fieldData])  => {
+        if (data.length == 0) {
+            //todo, ajust the position and style of the error message
+            let errorMessage = "User not exists";
+            res.redirect("/home");
+        } else {
+            let user = data[0];
+            res.render('message');
         }
     });
 }

@@ -1,7 +1,7 @@
 let db = require('../util/database');
 
 function getReplies(idpost) {
-    return db.execute('SELECT message, image FROM reply, user WHERE idpost = ? AND user.id = reply.iduser', [idpost]);
+    return db.execute('SELECT message, image, user.id FROM reply, user WHERE idpost = ? AND user.id = reply.iduser', [idpost]);
 }
 
 function addReply(reply) {

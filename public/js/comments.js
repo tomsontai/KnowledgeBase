@@ -45,7 +45,8 @@ getReplies = (id) => {
             for (reply of replies) {
                 let message = reply.message;
                 let image = reply.image;
-                let replyNode = createReplyNode(image, message);
+                let id = reply.id;
+                let replyNode = createReplyNode(image, message, id);
                 replySection.appendChild(replyNode);
             }
 
@@ -83,14 +84,19 @@ createPostForm = (idpost) => {
     return formContainer;
 }
 
-createReplyNode = (img, message) => {
+createReplyNode = (img, message, iduser) => {
     const replyDiv = document.createElement("div");
+    const userLink = document.createElement("a");
     const imageObject = document.createElement("object");
     const imageDefault = document.createElement("img");
     const messageDiv = document.createElement("div");
     const messagebody = document.createElement("p");
 
+    
+    
     replyDiv.className="reply";
+
+    userLink.href = "/profile/" + iduser;
 
     imageObject.data=img;
     imageObject.type="image/png";
@@ -100,12 +106,13 @@ createReplyNode = (img, message) => {
     imageDefault.alt="Default Avatar";
 
     imageObject.appendChild(imageDefault);
+    userLink.appendChild(imageObject);
 
     messagebody.className="replyMSG"
     messagebody.innerText = message;
     messageDiv.appendChild(messagebody);
 
-    replyDiv.appendChild(imageObject);
+    replyDiv.appendChild(userLink);
     replyDiv.appendChild(messageDiv);
 
     return replyDiv;
@@ -118,9 +125,7 @@ nextPage = () => {
     const curPage = document.getElementById("page").innerText;
 
     let page = +curPage + 1;
-    let fullPage = ((page + 1) * 2) <= postNum;
     let hasNextPage = ((page + 1) * 2) < postNum;
-    console.log(hasNextPage);
 
     showNextPage(page);
     document.getElementById("page").innerText = page;
@@ -184,7 +189,6 @@ showPreviousPage = (page) => {
     if (nodeTwo) {
         nodeTwo.style.display = "none";
     }
-
 
 }
 

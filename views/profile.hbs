@@ -1,39 +1,34 @@
 
 {{> header }}
-<div>
-            <div class="profile-img">
-                <object data={{user.image}} type="image/png">
-                    <img class="img-circle" src="/img/defaultAvatar.png" alt="Default Avatar"/>
-                </object>
-            </div>
-            
-            <div class="profile-info">
-                <h2 id="profileName">{{user.fname}} {{user.lname}}</h2>
-                <h3 id="profileDesc">{{user.about}}</h3>
-            </div>
+
+<div class="container-fluid" id="profileColumns">
+  <div class="row row-no-gutters">
+    <div class="col-sm-6" id="columnLeft">
+        <object id="profilePic" data={{user.image}} type="image/png">
+            <img class="img-circle" src="/img/defaultAvatar.png" alt="Default Avatar"/>
+        </object>
 
 
-            
-            <table class="table">
-                    <tbody>
-                        <tr>
-                            <a href=""><button>Message</button></a>
-                        </tr>
-                        <tr>
-                            <td><a>{{user.posts}}</a></td>
-                            <td>posts</td>         
-                        <tr>
-                            <td>likes</td>
-                            <td>{{user.likes}}</td>
-                        </tr>
-                </tbody>
-            </table>
-
-
+        <div class="userInfo"> 
+            <span id="profileName">{{user.fname}} {{user.lname}}</span>
+            <br>
+            <span id="profileAbout">{{user.about}}</span>
         </div>
+    </div>
+    <div class="col-sm-6" id="columnRight">
+        <a href=""><button id="messageBTN">Message</button></a>
+        <br>
+        <span><a>{{user.posts}}</a> posts</span>
+        <p>{{user.likes}} likes</p>
+    </div>
+  </div>
+</div>
 
 
-<div class="post-list">
+
+<h1 id="allPostsTitle">All posts by {{user.fname}}</h1>
+
+<div class="post-list" id="postsByUser">
     {{#each posts}}
         {{> postcard post=posts}}
     {{/each}}
