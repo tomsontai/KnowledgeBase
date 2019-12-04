@@ -37,11 +37,21 @@ function searchBySubject(key) {
                         GROUP BY p.idpost`, [pattern]);
 }
 
+function searchByTopic(topic) {
+    return db.execute(`SELECT p.*, image, count(reply.idreply) AS replies
+                        From post AS p 
+                        LEFT JOIN reply ON p.idpost = reply.idpost
+                        LEFT JOIN user ON p.iduser = user.id 
+                        WHERE p.topic LIKE ?
+                        GROUP BY p.idpost`, [topic]);
+}
+
 module.exports = {
     // testConnection : testConnection,
     getPost         :   getPost,
     getPostByUser   :   getPostByUser,
     writePost       :   writePost,
     getRecentPosts  :   getRecentPosts,
-    searchBySubject :   searchBySubject
+    searchBySubject :   searchBySubject,
+    searchByTopic   :   searchByTopic
 }

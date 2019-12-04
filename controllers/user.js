@@ -215,3 +215,21 @@ exports.message = (req,res,next) => {
         }
     });
 }
+
+exports.conversations = (req, res, next) => {
+    let iduser = req.params.id;
+    let Profile = db.getUser(iduser);
+    Profile.then ( ([data, fieldData])  => {
+        if (data.length == 0) {
+            //todo, ajust the position and style of the error message
+            let errorMessage = "User not exists";
+            res.redirect("/home");
+        } else {
+            let user = data[0];
+            res.render('conversations', {
+                user: user,
+                homeCSS: true
+            });
+        }
+    });
+}
