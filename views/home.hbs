@@ -73,15 +73,15 @@
                 </form>
             </div>
 
-            <div class="post-list">
+            <div class="post-list" id="post-list-{{posts.length}}>
                 
                 
-                {{> postcard posts.[0]}}
+                {{posts.length}}
                 
                 {{#each this.posts as |post|}}
+                    <div id="reply-{{@index}}">
                     {{> postcard post=post}}
-                    <h1>{{post.iduser}}</h1>
-                    <h1>{{post.image}}</h1>
+                    </div>
                 {{/each}}
                 
             </div>

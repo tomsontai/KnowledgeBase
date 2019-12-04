@@ -158,7 +158,7 @@ exports.profile = (req, res, next) => {
                 res.render('profile', {
                     user: user,
                     posts: posts,
-                    homeCSS: true
+                    profileCSS: true
                 });
             });
         }
