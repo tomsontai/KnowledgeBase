@@ -53,3 +53,8 @@
     overflow: scroll;
     overflow-x:hidden;
 }
+
+.conversation {
+    overflow: scroll;
+    overflow-x:hidden;
+}

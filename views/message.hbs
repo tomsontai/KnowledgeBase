@@ -30,9 +30,9 @@
         <div class="form-section">
         <div class="message-form">
             <form name=messageSubmit action="startConversation" method=POST>
-                <input id="msgSubject" type="text" name="subject" placeholder="subject">
+                <input id="msgSubject" type="text" name="subject" placeholder="subject" required>
                 <br>
-                <textarea id="msgDetails" type="text" name="details" placeholder="message details..." rows="5"></textarea>
+                <textarea id="msgDetails" type="text" name="details" placeholder="message details..." rows="5" required></textarea>
                 <br>
                 <input id="messageBTN" type="submit" value="Message">
                 <input type="hidden" value={{user.id}} name="recipientId">

@@ -56,13 +56,14 @@ router.get("/profile/:id", userController.profile);
 router.get("/message/:id", userController.message);
 
 
-router.get("/conversations/:id", messageController.getUserConversations);
+// router.get("/conversations/:id", messageController.getUserConversations);
 
-router.post("/message/startConversation", messageController.startConversation);
+// router.post("/message/startConversation", messageController.startConversation);
 
 router.get("/conversations/:id", messageController2.startConversation);
 router.get("/showMessages/:id", messageController2.showMessage);
 router.post("/showMessages/sendMessage", messageController2.addMessage);
+router.post("/message/startConversation", messageController2.addConversation);
 
 module.exports = router;
 
