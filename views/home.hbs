@@ -75,12 +75,13 @@
 
             <div class="post-list">
                 
-                {{posts.[0].iduser}}
+                
                 {{> postcard posts.[0]}}
                 
-                {{#each posts}}
-                    {{> postcard post=posts}}
-                    
+                {{#each this.posts as |post|}}
+                    {{> postcard post=post}}
+                    <h1>{{post.iduser}}</h1>
+                    <h1>{{post.image}}</h1>
                 {{/each}}
                 
             </div>
