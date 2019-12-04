@@ -1,5 +1,5 @@
 {{> header }}
-<div class="flex-container">
+{{!-- <div class="flex-container">
     <div class="postcard-image">
             <object data={{user.image}} type="image/png">
                 <img class="img-circle" id="posterIMG" src="/img/defaultAvatar.png" alt="Default Avatar"/>
@@ -15,4 +15,31 @@
             </form>
         </div>
     </div>
+</div> --}}
+
+<div class="container-fluid">
+  <div class="row" id="messageRow">
+    <div class="col-sm-4" id="leftCol">
+        <div class="postcard-image">
+            <object data={{user.image}} type="image/png">
+                <img class="img-circle" id="posterIMG" src="/img/defaultAvatar.png" alt="Default Avatar"/>
+            </object>
+        </div>
+    </div>
+    <div class="col-sm-8" id="rightCol">
+        <div class="form-section">
+        <div class="message-form">
+            <form name=messageSubmit action="startConversation" method=POST>
+                <input id="msgSubject" type="text" name="subject" placeholder="subject">
+                <br>
+                <textarea id="msgDetails" type="text" name="details" placeholder="message details..." rows="5"></textarea>
+                <br>
+                <input id="messageBTN" type="submit" value="Message">
+                <input type="hidden" value={{user.id}} name="recipientId">
+            </form>
+        </div>
+    </div>
+        
+    </div>
+  </div>
 </div>
