@@ -14,6 +14,7 @@ router.get('/', function (req,res) {
 });
 
 router.get('/home', userController.home);
+router.get('/home/allPost', userController.allMyPosts);
 router.get('/logout', userController.logout);
 router.post('/auth',userController.authentication);
 router.post('/about', userController.about);
@@ -41,6 +42,7 @@ router.post('/searchSubject', postController.searchSubject)
 // reply routes, seperate later
 router.get("/post/:idpost/replies", postController.getReplies);
 router.post("/post/addReply", postController.addReply);
+
 
 
 

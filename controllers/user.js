@@ -40,6 +40,24 @@ exports.home = (req, res, next) => {
     }  
 }
 
+exports.allMyPosts = (req, res, next) => {
+    if(req.session.loggedin) {
+        var id = req.session.user.id;
+
+        let Posts = postdb.getPostByUser(id);
+        Posts.then( ([posts, fieldData] ) => {
+            res.render('home', {
+                user: req.session.user,
+                posts: posts,
+                homeCSS: true,
+                allPost: true
+            });
+        });
+    } else {
+        res.render('login', {loginCSS: true});
+    } 
+}
+
 
 exports.authentication = (req, res, next) => {
     var email = req.body.email;
@@ -81,7 +99,9 @@ exports.register = (req, res, next) => {
     if (req.session.email) {
         let Registration = db.register(user);
         Registration.then( ([result, filedData]) => {
-            // req.session.sessionId = result.insertId;
+            user.id = result.insertId;
+            console.log(result);
+            console.log("wth");
             req.session.loggedin = true;
             req.session.user = user;
             res.redirect('/home');
@@ -141,23 +161,27 @@ exports.update = (req, res, next) => {
 
 exports.profile = (req, res, next) => {
     if(req.session.loggedin) {
-        let iduser = req.params.id;
-        let Profile = db.getUser(iduser);
-        Profile.then ( ([data, fieldData])  => {
-            if (data.length == 0) {
-                res.redirect("/home");
-            } else {
-                let user = data[0];
-                let UserPosts = postdb.getPostByUser(iduser);
-                UserPosts.then( ([posts, filedData]) => {
-                    res.render('profile', {
-                        user: user,
-                        posts: posts,
-                        profileCSS: true
+        if (req.session.user.id != req.params.id) {
+            let iduser = req.params.id;
+            let Profile = db.getUser(iduser);
+            Profile.then ( ([data, fieldData])  => {
+                if (data.length == 0) {
+                    res.redirect("/home");
+                } else {
+                    let user = data[0];
+                    let UserPosts = postdb.getPostByUser(iduser);
+                    UserPosts.then( ([posts, filedData]) => {
+                        res.render('profile', {
+                            user: user,
+                            posts: posts,
+                            profileCSS: true
+                        });
                     });
-                });
-            }
-        });
+                }
+            });
+        } else {
+            res.redirect('/home/allPost');
+        }
     } else {
         res.render('login', {loginCSS: true});
     }
