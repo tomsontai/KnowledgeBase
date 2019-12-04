@@ -1,0 +1,18 @@
+<section class="container-fluid">
+    <div class="row">
+        <div class="postcard-image">
+             <a href="/conversations/{{this.idconversation}}">
+                <object data={{this.image}} type="image/png">
+                    <img class="img-circle" id="posterIMG" src="/img/defaultAvatar.png" alt="Default Avatar"/>
+                </object>
+            </a>
+        </div>
+        <div class="postcard-body">
+            <div class="postcard-title">
+                <div class="postcard-subject">{{this.name}}</b></div>
+                <div class="postcard-subject">{{this.date}}</div>
+                <div class="postcard-topic">{{this.topic}}</div>
+            </div>  
+        </div>        
+    </div>
+</section>
