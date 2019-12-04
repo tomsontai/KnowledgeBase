@@ -100,8 +100,6 @@ exports.register = (req, res, next) => {
         let Registration = db.register(user);
         Registration.then( ([result, filedData]) => {
             user.id = result.insertId;
-            console.log(result);
-            console.log("wth");
             req.session.loggedin = true;
             req.session.user = user;
             res.redirect('/home');
@@ -135,8 +133,7 @@ exports.about = (req, res, next) => {
                 // req.session.sessionId = user[0].id;
                 res.redirect('/');
             }
-        });
-        
+        });  
     }
 }
 
@@ -187,7 +184,21 @@ exports.profile = (req, res, next) => {
     }
 }
 
-exports.message = (req, res, next) => {
+
+
+
+exports.likeUser = (req, res, next) => {
+    let id = req.params.id;
+    let Result = db.likeUser(id);
+    Result.then(result => {
+        console.log(result);
+        res.redirect('/profile/' +id);
+    });
+
+}
+
+exports.message = (req,res,next) => {
+
     let iduser = req.params.id;
     let Profile = db.getUser(iduser);
     Profile.then ( ([data, fieldData])  => {

@@ -32,6 +32,7 @@ router.get('/editProfile', function (req, res) {
 });
 
 router.post('/updateProfile', userController.update);
+router.get('/profile/:id/like', userController.likeUser);
 
 
 
@@ -51,7 +52,7 @@ router.get("/profile/:id", userController.profile);
 
 router.get("/message/:id", userController.message);
 
-router.post("/message/startConversation", messageController.startConversation);
+// router.post("/message/startConversation", messageController.startConversation);
 
 module.exports = router;
 
