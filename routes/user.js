@@ -46,6 +46,7 @@ router.post("/post/addReply", postController.addReply);
 
 router.get("/profile/:id", userController.profile);
 
+router.get("/message/:id", userController.message);
 
 module.exports = router;
 
