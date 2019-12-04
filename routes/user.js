@@ -1,6 +1,7 @@
 const express = require('express');
 const userController = require('../controllers/user');
 const postController = require('../controllers/post');
+const messageController = require('../controllers/message');
 
 const router = express.Router();
 
@@ -31,6 +32,7 @@ router.get('/editProfile', function (req, res) {
 });
 
 router.post('/updateProfile', userController.update);
+router.get('/profile/:id/like', userController.likeUser);
 
 
 
