@@ -1,5 +1,4 @@
 let db = require('../models/postdb');
-let userdb = require('../models/userdb');
 let replydb = require('../models/replydb');
 
 exports.write = (req, res, next) => {
@@ -18,7 +17,6 @@ exports.write = (req, res, next) => {
 
 exports.getReplies = (req, res, next) => {
     let idpost = req.params.idpost;
-    console.log(idpost);
     let Replies = replydb.getReplies(idpost);
     Replies.then( ([result, filedData]) => {
         res.send(result);
@@ -46,14 +44,13 @@ exports.searchSubject = (req, res, next) => {
         if (posts.length == 0) {
             res.render('searchResult', {
                 error: true,
-                homeCSS: true
+                searchCSS: true
             });
         } else {
             res.render('searchResult', {
                 posts: posts,
-                homeCSS: true
+                searchCSS: true
             });
         }  
     });
 }
-

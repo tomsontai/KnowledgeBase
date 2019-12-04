@@ -7,16 +7,13 @@ const router = express.Router();
 
 router.get('/', function (req,res) {
     if(req.session.loggedin) {
-        res.render('home', {user: req.session.user, homeCSS: true});
+        res.redirect('/home');
     } else {
         res.render('login', {loginCSS: true});
     }   
 });
 
 router.get('/home', userController.home);
-
-router.get('/test', userController.home);
-
 router.get('/logout', userController.logout);
 router.post('/auth',userController.authentication);
 router.post('/about', userController.about);
@@ -44,6 +41,10 @@ router.post('/searchSubject', postController.searchSubject)
 // reply routes, seperate later
 router.get("/post/:idpost/replies", postController.getReplies);
 router.post("/post/addReply", postController.addReply);
+
+
+
+router.get("/profile/:id", userController.profile);
 
 
 module.exports = router;

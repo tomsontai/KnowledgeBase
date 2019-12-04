@@ -171,3 +171,41 @@ select {
     padding-left:80px;
     padding-right:80px;
 }
+
+
+
+/* replies */
+
+
+.reply {
+    color:grey;
+    display:flex;
+    padding:15px;
+}
+
+.replyIMG {
+    max-width: 80px;
+    max-height: 80px;
+    border-radius:50%;
+}
+
+.replyMSG {
+    padding-left:25px;
+}
+
+.replyBTN {
+    margin-top:11px;
+    width: 50%;
+    vertical-align: middle;
+    background-color: #1E90FF;
+    border: 0;
+    box-sizing: border-box;
+    cursor: pointer;
+    font-weight: bold;
+    color: #ffffff;
+    border-radius: 4px;
+    padding:10px;
+    margin-bottom:30px;
+}
+
+
