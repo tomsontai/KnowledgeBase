@@ -1,9 +1,11 @@
 <section class="container-fluid">
     <div class="row">
         <div class="postcard-image">
-            <object data={{this.image}} type="image/png">
-                <img class="img-circle" id="posterIMG" src="/img/defaultAvatar.png" alt="Default Avatar"/>
-            </object>
+             <a href="/profile/{{this.iduser}}">
+                <object data={{this.image}} type="image/png">
+                    <img class="img-circle" id="posterIMG" src="/img/defaultAvatar.png" alt="Default Avatar"/>
+                </object>
+            </a>
         </div>
         <div class="postcard-body">
             <div class="postcard-title">
@@ -21,11 +23,7 @@
                     </a>
                 </p>
             </div>
-            <div class="comments-section" id="comments-section-{{this.idpost}}">
-            </div>
-            
-        </div>
-        
-        
+            <div class="comments-section" id="comments-section-{{this.idpost}}"></div>
+        </div>        
     </div>
 </section>

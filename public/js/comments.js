@@ -69,6 +69,7 @@ createPostForm = (idpost) => {
     messageInput.type="textarea";
     messageInput.placeholder="Add your reply..";
 
+    addReplyButton.className="replyBTN"
     addReplyButton.type="button";
     addReplyButton.innerText="Add Reply";
     
@@ -98,12 +99,13 @@ createReplyNode = (img, message) => {
     imageObject.data=img;
     imageObject.type="image/png";
 
-    imageDefault.className="img-circle";
+    imageDefault.className="replyIMG";
     imageDefault.src="/img/defaultAvatar.png";
     imageDefault.alt="Default Avatar";
 
     imageObject.appendChild(imageDefault);
 
+    messagebody.className="replyMSG"
     messagebody.innerText = message;
     messageDiv.appendChild(messagebody);
 

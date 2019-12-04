@@ -1,0 +1,38 @@
+
+{{> header }}
+<div>
+            <div class="profile-img">
+                <object data={{user.image}} type="image/png">
+                    <img class="img-circle" src="/img/defaultAvatar.png" alt="Default Avatar"/>
+                </object>
+            </div>
+            
+            <div class="profile-info">
+                <h2 id="profileName">{{user.fname}} {{user.lname}}</h2>
+                <h3 id="profileDesc">{{user.about}}</h3>
+            </div>
+
+
+            <table class="table table-condensed">
+                    <tbody>
+                    <tr>
+                        <td>posts</td>
+                        <td><a>{{user.posts}}</a></td>
+                    <tr>
+                        <td>messages</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>likes</td>
+                        <td>{{user.likes}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+<div class="post-list">
+    {{#each posts}}
+        {{> postcard post=posts}}
+    {{/each}}
+</div>

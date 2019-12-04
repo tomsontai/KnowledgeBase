@@ -4,9 +4,11 @@
         <!-- todo put sections into partials -->
         <div class="col-sm-4">
             <div class="profile-img">
-                <object data={{user.image}} type="image/png">
-                    <img class="img-circle" src="/img/defaultAvatar.png" alt="Default Avatar"/>
-                </object>
+                <a href="/profile/{{user.id}}">
+                    <object data={{user.image}} type="image/png">
+                        <img class="img-circle" src="/img/defaultAvatar.png" alt="Default Avatar"/>
+                    </object>
+                </a>
             </div>
             
             <div class="profile-info">
@@ -72,9 +74,15 @@
             </div>
 
             <div class="post-list">
+                
+                {{posts.[0].iduser}}
+                {{> postcard posts.[0]}}
+                
                 {{#each posts}}
                     {{> postcard post=posts}}
+                    
                 {{/each}}
+                
             </div>
         </div>
     </div>

@@ -1,0 +1,88 @@
+/* Temprory stores header css here, might need to seperate later */
+
+#navbar {
+    background-color: #DCDCDC;
+}
+
+#headerLogo{
+    margin-top:13px;
+}
+
+#k {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size:50px;
+}
+
+#b {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size:50px;
+    color: #00BFFF;
+}
+
+#searchBar{
+    margin-top:15px;
+    width:500px;
+    font-style:italic;
+    margin-bottom:15px;
+}
+
+#searchBarBtn{
+    background-color: #1E90FF;
+    color: white;
+}
+
+#links{
+    margin-top:13px;
+}
+
+
+
+
+/*posts*/
+
+.post-list {
+    padding-top:25px;
+    padding-left:200px;
+    padding-right:200px;
+
+}
+
+.error{
+    padding-top:25px;
+    padding-left:200px;
+    padding-right:200px;
+}
+
+
+[type="image/png"] {
+    max-width: 80px;
+    max-height: 80px;
+    border-radius:50%;
+}
+
+#searchTitle {
+    color:grey;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size:30px;
+    padding:30px;
+}
+
+
+/* replies */
+
+
+.reply {
+    color:grey;
+    display:flex;
+    padding:15px;
+}
+
+.replyIMG {
+    max-width: 80px;
+    max-height: 80px;
+    border-radius:50%;
+}
+
+.replyMSG {
+    padding-left:25px;
+}
