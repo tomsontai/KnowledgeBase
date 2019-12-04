@@ -1,5 +1,5 @@
+{{> header}}
 
-{{> header }}
 
 <div class="container-fluid" id="profileColumns">
   <div class="row row-no-gutters">
@@ -7,7 +7,6 @@
         <object id="profilePic" data={{user.image}} type="image/png">
             <img class="img-circle" src="/img/defaultAvatar.png" alt="Default Avatar"/>
         </object>
-
 
         <div class="userInfo"> 
             <span id="profileName">{{user.fname}} {{user.lname}}</span>
@@ -33,3 +32,4 @@
         {{> postcard post=posts}}
     {{/each}}
 </div>
+

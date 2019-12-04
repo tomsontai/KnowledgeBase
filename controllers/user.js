@@ -110,11 +110,9 @@ exports.about = (req, res, next) => {
                 req.session.lastName = lastName;
                 req.session.password = password;
                 res.render('about', {loginCSS: true});
-                console.log(req.body);
             } else {
                 // res.send(user[0]);
                 // req.session.sessionId = user[0].id;
-                console.log(req.session);
                 res.redirect('/');
             }
         });
@@ -137,37 +135,36 @@ exports.update = (req, res, next) => {
 
     let Update = db.update(user);
     Update.then( ([result, filedData]) => {
-        console.log(result);
         res.redirect('/home');
     });
 }
 
 exports.profile = (req, res, next) => {
-    let iduser = req.params.id;
-    console.log(iduser);
-    let Profile = db.getUser(iduser);
-    Profile.then ( ([data, fieldData])  => {
-        if (data.length == 0) {
-            //todo, ajust the position and style of the error message
-            let errorMessage = "User not exists";
-            res.redirect("/home");
-        } else {
-            let user = data[0];
-            let UserPosts = postdb.getPostByUser(iduser);
-            UserPosts.then( ([posts, filedData]) => {
-                res.render('profile', {
-                    user: user,
-                    posts: posts,
-                    profileCSS: true
+    if(req.session.loggedin) {
+        let iduser = req.params.id;
+        let Profile = db.getUser(iduser);
+        Profile.then ( ([data, fieldData])  => {
+            if (data.length == 0) {
+                res.redirect("/home");
+            } else {
+                let user = data[0];
+                let UserPosts = postdb.getPostByUser(iduser);
+                UserPosts.then( ([posts, filedData]) => {
+                    res.render('profile', {
+                        user: user,
+                        posts: posts,
+                        profileCSS: true
+                    });
                 });
-            });
-        }
-    });
+            }
+        });
+    } else {
+        res.render('login', {loginCSS: true});
+    }
 }
 
 exports.message = (req,res,next) => {
     let iduser = req.params.id;
-    console.log(iduser);
     let Profile = db.getUser(iduser);
     Profile.then ( ([data, fieldData])  => {
         if (data.length == 0) {
