@@ -6,7 +6,7 @@ function startConversation(conversation) {
 
 function getConversations(userId) {
     
-    return db.execute(`SELECT p.*, user.fname, user.lname FROM
+    return db.execute(`SELECT p.*, user.fname, user.lname, user.image FROM
         (
             SELECT DISTINCT if(idsender=1, idrecipient, idsender) AS id, idconversation, subject, date
             FROM conversation
