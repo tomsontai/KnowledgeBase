@@ -136,9 +136,9 @@ select {
 
 /* Temprory stores postcard css here, might need to seperate later */
 
-.postcard-body {
+/* .postcard-body {
     float:right;
-}
+} */
 
 #posterIMG {
     max-width: 80px;
@@ -153,6 +153,7 @@ select {
 
 .postcard-image {
     float: left;
+    margin-right:30px;
 }
 
 
@@ -219,8 +220,7 @@ select {
 #reply-3,
 #reply-4,
 #page,
-#postNum,
-#prevPaginate {
+#postNum {
     display: none;
 }
 
@@ -240,9 +240,13 @@ select {
     margin-bottom:30px;
     width:100px;
     border: 2px solid #1E90FF;
+    position: fixed;
+    bottom:0;
+    right:2;
 }
 
 #nextPaginate {
+    margin-right:50px;
     margin-top:20px;
     width: 50%;
     vertical-align: middle;
@@ -257,4 +261,7 @@ select {
     margin-bottom:30px;
     width:100px;
     border: 2px solid #1E90FF;
+    position: fixed;
+    bottom:0;
+    right:0;
 }
