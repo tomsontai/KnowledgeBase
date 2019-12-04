@@ -4,7 +4,7 @@
         <!-- todo put sections into partials -->
         <div class="col-sm-4">
             <div class="profile-img">
-                    <object data={{user.image}} type="image/png">
+                    <object id="userProfilePic"  data={{user.image}} type="image/png">
                         <img class="img-circle" src="/img/defaultAvatar.png" alt="Default Avatar"/>
                     </object>
             </div>
@@ -91,10 +91,10 @@
                 </div>
                 <div class="paginate">
                     <div>
-                        <button id="prevPaginate" onclick="previousPage()">Previous</button>
-                    </div>
-                    <div>
-                        <button id="nextPaginate" onclick="nextPage()">Next</button>
+                        <span>
+                            <button id="prevPaginate" onclick="previousPage()">Previous</button>
+                            <button id="nextPaginate" onclick="nextPage()">Next</button>
+                        </span>
                     </div>
                 </div>
             </div>
