@@ -8,7 +8,6 @@ let cookieParser = require('cookie-parser');
 
 let app = express();
 
-const PORT = process.env.PORT || 8080
 
 const expressHbs = require('express-handlebars');
 app.engine(
@@ -39,4 +38,4 @@ app.use(express.static(path.join(__dirname,'public')));
 let userRoutes = require('./routes/user');
 app.use(userRoutes);
 
-app.listen(PORT, () => console.log('Server ready'))
+app.listen(8080, () => console.log('Server ready'))

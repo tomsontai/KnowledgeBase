@@ -1,30 +1,24 @@
+{{> header}}
 
-{{> header }}
 
 <div class="container-fluid" id="profileColumns">
   <div class="row row-no-gutters">
-  <div class="col-sm-6" id="columnLeft">
-    <object id="profilePic" data={{user.image}} type="image/png">
-        <img class="img-circle" src="/img/defaultAvatar.png" alt="Default Avatar"/>
-    </object>
+    <div class="col-sm-6" id="columnLeft">
+        <object id="profilePic" data={{user.image}} type="image/png">
+            <img class="img-circle" src="/img/defaultAvatar.png" alt="Default Avatar"/>
+        </object>
 
-    <div class="userInfo"> 
-        <span id="profileName">{{user.fname}} {{user.lname}}</span>
-        <br>
-
-        <span id="profileAbout">{{user.about}}</span>
+        <div class="userInfo"> 
+            <span id="profileName">{{user.fname}} {{user.lname}}</span>
+            <br>
+            <span id="profileAbout">{{user.about}}</span>
+        </div>
     </div>
-
-  
-
-
-  </div>
     <div class="col-sm-6" id="columnRight">
         <a href=""><button id="messageBTN">Message</button></a>
         <br>
-        <span><a>{{user.posts}}</a> posts</span><p>
+        <span><a>{{user.posts}}</a> posts</span>
         <p>{{user.likes}} likes</p>
-    
     </div>
   </div>
 </div>
@@ -38,3 +32,4 @@
         {{> postcard post=posts}}
     {{/each}}
 </div>
+

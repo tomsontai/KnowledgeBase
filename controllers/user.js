@@ -40,6 +40,24 @@ exports.home = (req, res, next) => {
     }  
 }
 
+exports.allMyPosts = (req, res, next) => {
+    if(req.session.loggedin) {
+        var id = req.session.user.id;
+
+        let Posts = postdb.getPostByUser(id);
+        Posts.then( ([posts, fieldData] ) => {
+            res.render('home', {
+                user: req.session.user,
+                posts: posts,
+                homeCSS: true,
+                allPost: true
+            });
+        });
+    } else {
+        res.render('login', {loginCSS: true});
+    } 
+}
+
 
 exports.authentication = (req, res, next) => {
     var email = req.body.email;
@@ -81,7 +99,9 @@ exports.register = (req, res, next) => {
     if (req.session.email) {
         let Registration = db.register(user);
         Registration.then( ([result, filedData]) => {
-            // req.session.sessionId = result.insertId;
+            user.id = result.insertId;
+            console.log(result);
+            console.log("wth");
             req.session.loggedin = true;
             req.session.user = user;
             res.redirect('/home');
@@ -110,11 +130,9 @@ exports.about = (req, res, next) => {
                 req.session.lastName = lastName;
                 req.session.password = password;
                 res.render('about', {loginCSS: true});
-                console.log(req.body);
             } else {
                 // res.send(user[0]);
                 // req.session.sessionId = user[0].id;
-                console.log(req.session);
                 res.redirect('/');
             }
         });
@@ -137,35 +155,39 @@ exports.update = (req, res, next) => {
 
     let Update = db.update(user);
     Update.then( ([result, filedData]) => {
-        console.log(result);
         res.redirect('/home');
     });
 }
 
 exports.profile = (req, res, next) => {
-    let iduser = req.params.id;
-    let Profile = db.getUser(iduser);
-    Profile.then ( ([data, fieldData])  => {
-        if (data.length == 0) {
-            //todo, ajust the position and style of the error message
-            let errorMessage = "User not exists";
-            res.redirect("/home");
-        } else {
-            let user = data[0];
-            let UserPosts = postdb.getPostByUser(iduser);
-            UserPosts.then( ([posts, filedData]) => {
-                console.log(posts);
-                res.render('profile', {
-                    user: user,
-                    posts: posts,
-                    homeCSS: true
-                });
+    if(req.session.loggedin) {
+        if (req.session.user.id != req.params.id) {
+            let iduser = req.params.id;
+            let Profile = db.getUser(iduser);
+            Profile.then ( ([data, fieldData])  => {
+                if (data.length == 0) {
+                    res.redirect("/home");
+                } else {
+                    let user = data[0];
+                    let UserPosts = postdb.getPostByUser(iduser);
+                    UserPosts.then( ([posts, filedData]) => {
+                        res.render('profile', {
+                            user: user,
+                            posts: posts,
+                            profileCSS: true
+                        });
+                    });
+                }
             });
+        } else {
+            res.redirect('/home/allPost');
         }
-    });
+    } else {
+        res.render('login', {loginCSS: true});
+    }
 }
 
-exports.message = (req, res, next) => {
+exports.message = (req,res,next) => {
     let iduser = req.params.id;
     let Profile = db.getUser(iduser);
     Profile.then ( ([data, fieldData])  => {
@@ -175,10 +197,7 @@ exports.message = (req, res, next) => {
             res.redirect("/home");
         } else {
             let user = data[0];
-            res.render('message', {
-                user: user,
-                homeCSS: true
-            });
+            res.render('message');
         }
     });
 }

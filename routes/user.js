@@ -14,6 +14,7 @@ router.get('/', function (req,res) {
 });
 
 router.get('/home', userController.home);
+router.get('/home/allPost', userController.allMyPosts);
 router.get('/logout', userController.logout);
 router.post('/auth',userController.authentication);
 router.post('/about', userController.about);
@@ -44,9 +45,12 @@ router.post("/post/addReply", postController.addReply);
 
 
 
+
 router.get("/profile/:id", userController.profile);
 
 router.get("/message/:id", userController.message);
+
+router.post("/message/startConversation", messageController.startConversation);
 
 module.exports = router;
 

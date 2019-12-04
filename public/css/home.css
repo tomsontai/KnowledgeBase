@@ -13,6 +13,12 @@
     text-align: center;
 }
 
+#userProfilePic{
+    max-width: 300px;
+    max-height: 300px;
+    border-radius:50%;
+}
+
 #profileName {
     font-size:30px;
     text-align:center;
@@ -209,3 +215,46 @@ select {
 }
 
 
+#reply-2,
+#reply-3,
+#reply-4,
+#page,
+#postNum,
+#prevPaginate {
+    display: none;
+}
+
+
+#prevPaginate {
+    margin-top:20px;
+    width: 50%;
+    vertical-align: middle;
+    background-color: #ffffff;
+    border: 0;
+    box-sizing: border-box;
+    cursor: pointer;
+    font-weight: bold;
+    color: #1E90FF;
+    border-radius: 4px;
+    padding:10px;
+    margin-bottom:30px;
+    width:100px;
+    border: 2px solid #1E90FF;
+}
+
+#nextPaginate {
+    margin-top:20px;
+    width: 50%;
+    vertical-align: middle;
+    background-color: #ffffff;
+    border: 0;
+    box-sizing: border-box;
+    cursor: pointer;
+    font-weight: bold;
+    color: #1E90FF;
+    border-radius: 4px;
+    padding:10px;
+    margin-bottom:30px;
+    width:100px;
+    border: 2px solid #1E90FF;
+}

@@ -4,11 +4,9 @@
         <!-- todo put sections into partials -->
         <div class="col-sm-4">
             <div class="profile-img">
-                <a href="/profile/{{user.id}}">
-                    <object data={{user.image}} type="image/png">
+                    <object id="userProfilePic"  data={{user.image}} type="image/png">
                         <img class="img-circle" src="/img/defaultAvatar.png" alt="Default Avatar"/>
                     </object>
-                </a>
             </div>
             
             <div class="profile-info">
@@ -21,7 +19,7 @@
                     <tbody>
                     <tr>
                         <td>posts</td>
-                        <td><a>{{user.posts}}</a></td>
+                        <td><a href="/home/allPost">{{user.posts}}</a></td>
                     <tr>
                         <td>messages</td>
                         <td></td>
@@ -39,51 +37,67 @@
         </div>
 
 
-        <!-- put in partials -->
-        <div class="col-sm-8" id="secondCol">
-            <div class="post-form">
-                <h2 id="questionTitle">Whats your question today?</h2>
-                <form action="/writepost" method="post">
-                    <input type="text" name="subject" placeholder="Subject" autocomplete="off" required>
-                    <textarea id="textbox" name="content" placeholder="Explain in detail" rows="5"></textarea>
-                    <select name="topic" required>
-                        <option value=""></option>
-                        <option value="php">PHP</option>
-                        <option value="nodejs">NodeJs</option>
-                        <option value="java">JAVA</option>
-                        <option value="sql">SQL</option>
-                        <option value="zend">Zend</option>
-                    </select>
-                    <input id="timelineBtn" type="submit" value="post to timeline">
-                </form>
+        {{#if allPost}}
+            <div class="col-sm-8" id="secondCol">
+                <h2 id="questionTitle">ALL POST</h2>
+                <div class="post-list">
+                    {{#each this.posts as |post|}}
+                        {{> postcard post=post}}
+                    {{/each}}
+                </div>
             </div>
+        {{else}}
+            <div class="col-sm-8" id="secondCol">
+                <div class="post-form">
+                    <h2 id="questionTitle">Whats your question today?</h2>
+                    <form action="/writepost" method="post">
+                        <input type="text" name="subject" placeholder="Subject" autocomplete="off" required>
+                        <textarea id="textbox" name="content" placeholder="Explain in detail" rows="5"></textarea>
+                        <select name="topic" required>
+                            <option value=""></option>
+                            <option value="php">PHP</option>
+                            <option value="nodejs">NodeJs</option>
+                            <option value="java">JAVA</option>
+                            <option value="sql">SQL</option>
+                            <option value="zend">Zend</option>
+                        </select>
+                        <input id="timelineBtn" type="submit" value="post to timeline">
+                    </form>
+                </div>
 
-            <div class="search-topic">
-                <form action="/searchtopic" method="post">
-                    <span id="topicTitle"><b>Search by topic:</b></span>
-                    <select name="topic" required>
-                        <option value=""></option>
-                        <option value="php">PHP</option>
-                        <option value="nodejs">NodeJs</option>
-                        <option value="java">JAVA</option>
-                        <option value="sql">SQL</option>
-                        <option value="zend">Zend</option>
-                    </select>
-                    <input class="search-submit" type="submit" value="go">
-                </form>
-            </div>
+                <div class="search-topic">
+                    <form action="/searchtopic" method="post">
+                        <span id="topicTitle"><b>Search by topic:</b></span>
+                        <select name="topic" required>
+                            <option value=""></option>
+                            <option value="php">PHP</option>
+                            <option value="nodejs">NodeJs</option>
+                            <option value="java">JAVA</option>
+                            <option value="sql">SQL</option>
+                            <option value="zend">Zend</option>
+                        </select>
+                        <input class="search-submit" type="submit" value="go">
+                    </form>
+                </div>
 
-            <div class="post-list">
-                
-                {{posts.[0].iduser}}
-                {{> postcard posts.[0]}}
-                
-                {{#each posts}}
-                    {{> postcard post=posts}}
-                    
-                {{/each}}
-                
+                <div class="post-list">
+                    <div id="page">0</div>
+                    <div id="postNum">{{posts.length}}</div>
+                    {{#each this.posts as |post|}}
+                        <div id="reply-{{@index}}">
+                        {{> postcard post=post}}
+                        </div>
+                    {{/each}}
+                </div>
+                <div class="paginate">
+                    <div>
+                        <span>
+                            <button id="prevPaginate" onclick="previousPage()">Previous</button>
+                            <button id="nextPaginate" onclick="nextPage()">Next</button>
+                        </span>
+                    </div>
+                </div>
             </div>
-        </div>
+        {{/if}}
     </div>
 </div>
