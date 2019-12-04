@@ -54,3 +54,22 @@ exports.searchSubject = (req, res, next) => {
         }  
     });
 }
+
+
+exports.searchTopic = (req, res, next) => {
+    let topic = req.body.topic;
+    let Search = db.searchByTopic(topic);
+    Search.then( ([posts, fieldData]) => {
+        if (posts.length == 0) {
+            res.render('searchResult', {
+                error: true,
+                searchCSS: true
+            });
+        } else {
+            res.render('searchResult', {
+                posts: posts,
+                searchCSS: true
+            });
+        } 
+    });
+}
