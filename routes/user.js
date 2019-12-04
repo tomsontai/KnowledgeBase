@@ -1,6 +1,7 @@
 const express = require('express');
 const userController = require('../controllers/user');
 const postController = require('../controllers/post');
+const messageController = require('../controllers/message');
 
 const router = express.Router();
 
@@ -51,7 +52,7 @@ router.get("/profile/:id", userController.profile);
 
 router.get("/message/:id", userController.message);
 
-// router.post("/message/startConversation", messageController.startConversation);
+router.post("/message/startConversation", messageController.startConversation);
 
 module.exports = router;
 

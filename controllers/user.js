@@ -184,6 +184,9 @@ exports.profile = (req, res, next) => {
     }
 }
 
+
+
+
 exports.likeUser = (req, res, next) => {
     let id = req.params.id;
     let Result = db.likeUser(id);
@@ -195,6 +198,7 @@ exports.likeUser = (req, res, next) => {
 }
 
 exports.message = (req,res,next) => {
+
     let iduser = req.params.id;
     let Profile = db.getUser(iduser);
     Profile.then ( ([data, fieldData])  => {
@@ -204,7 +208,10 @@ exports.message = (req,res,next) => {
             res.redirect("/home");
         } else {
             let user = data[0];
-            res.render('message');
+            res.render('message', {
+                user: user,
+                homeCSS: true
+            });
         }
     });
 }
